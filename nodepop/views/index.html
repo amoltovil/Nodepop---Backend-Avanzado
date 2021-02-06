@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+  <% include cabecera.html %>
+  <h2>
+  <p><%=tipoanuncios%></p>
+  </h2>
+    
+  <div class='Anuncios'>
+    <% resultado.forEach(anuncio => {%>
+     <div class ='ad'>
+           
+       <img class ='img_ad' src="/images/anuncios/<%= anuncio.foto %>" alt="Imagen anuncio"> 
+        <h3>
+         <%= anuncio.nombre %>
+        </h3>
+        <p> Precio: <%= anuncio.precio %> € </p>
+        <% if (anuncio.venta) { %>
+          <p> Se Vende </p>
+        <% } else { %>
+          <p> Se Busca </p>
+         <% } %>
+         <p>Tags: <%=anuncio.tags %></p>
+      </div>
+     <%}) %>
+
+  </div>
+
+  </body>
+</html>
