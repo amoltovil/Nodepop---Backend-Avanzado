@@ -511,45 +511,52 @@ Un fichero JSON que contendrá todos los anuncios definidos en la colección anu
 
 Para abreviar explicamos a continuación los distintos tipos de filtros que podemos aplicar tanto en la ruta /api/anuncios como en /apiv1/anuncios
 
+- #### Resultado 
+
+Un fichero en formato JSON que nos muestra los datos resultantes de realizar la consulta a la base de datos según los filtros que hayamos establecido en la llamada http.
+
 - #### Ejemplos:
 
     **1. Lista de anuncios con páginación** 
 
     Si mostramos los anuncios de 10 en 10 en cada pagína, estas serían las llamadas http a realizar para 
-    la 1ª Página:  http://localhost:3000/api/anuncios/?skip=0&limit=10 
-    para la 2ª página: http://localhost:3000/api/anuncios/?skip=10&limit=10
-    y siguiente página: http://localhost:3000/api/anuncios/?skip=20&limit=10
+    la 1ª Página:  
+    http://localhost:3000/api/anuncios/?skip=0&limit=10  
+    para la 2ª página: 
+    http://localhost:3000/api/anuncios/?skip=10&limit=10  
+    y siguiente página: 
+    http://localhost:3000/api/anuncios/?skip=20&limit=10  
 
     **2. Lista de anuncios con filtro por tags** 
 
     Podremos buscar por uno o varios tags (separados por comas)
 
-    http://localhost:3000/api/anuncios/?tags=work,motor
-    http://localhost:3000/api/anuncios/?tags=animals
+        http://localhost:3000/api/anuncios/?tags=work,motor
+        http://localhost:3000/api/anuncios/?tags=animals
 
     **3. Lista de anuncios por tipo de anuncio (Venta ó Búsqueda)**
 
-    http://localhost:3000/api/anuncios/?venta=false
-    Obtiene los anuncios de tipo Se Busca
+        http://localhost:3000/api/anuncios/?venta=false
+        Obtiene los anuncios de tipo Se Busca
 
-    http://localhost:3000/api/anuncios/?venta=true
-    Obtiene los anuncios de tipo Se Vende
+        http://localhost:3000/api/anuncios/?venta=true
+        Obtiene los anuncios de tipo Se Vende
 
     **4. Lista de anuncios por rango de precios**
 
-    http://localhost:3000/api/anuncios/?precio=500-5000
-    Obtiene los anuncios cuyo precio es mayor o igual a 500 y menor o igual a 5000
+        http://localhost:3000/api/anuncios/?precio=500-5000
+        Obtiene los anuncios cuyo precio es mayor o igual a 500 y menor o igual a 5000
 
-    http://localhost:3000/api/anuncios/?precio=-10000
-    Obtiene los anuncios cuyo precio es menor o igual a 10000
+        http://localhost:3000/api/anuncios/?precio=-10000
+        Obtiene los anuncios cuyo precio es menor o igual a 10000
 
-    http://localhost:3000/api/anuncios/?precio=50000-
-    Obtiene los anuncios cuyo precio es mayor a 50000
+        http://localhost:3000/api/anuncios/?precio=50000-
+        Obtiene los anuncios cuyo precio es mayor a 50000
 
     **5. Lista de anuncios cuyo nombre empiece por una palabra**
 
-    http://localhost:3000/api/anuncios/?nombre=COC
-    Obtiene los anuncios que comienzan por la palabra COC
+        http://localhost:3000/api/anuncios/?nombre=COC
+        Obtiene los anuncios que comienzan por la palabra COC
 
     **6. Lista de anuncios con filtros de ordenación**
 
@@ -591,10 +598,6 @@ Para abreviar explicamos a continuación los distintos tipos de filtros que pode
     }
     ]
     ~~~
-
-#### Resultado 
-
-Un fichero en formato JSON que nos muestra los datos resultantes de realizar la consulta a la base de datos según los filtros que hayamos establecido en la llamada http.
 
 ### GET /api/anuncios/:id
 
@@ -717,6 +720,7 @@ PUT /api/anuncios/601ff2ac30a2ad4018c02b11 200 6.649 ms - 178
 
 ![Imagen de actualización de anuncio desde POSTMAN](/nodepop/public/images/docum/updateanuncio.png)
 
+- #### Resultado:
 ~~~
 {
     "result": {
