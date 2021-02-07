@@ -1,12 +1,54 @@
-# Práctica de Desarrollo backend con Nodejs
+# Documentación Práctica WEB-API/Node.js/MongoDB
 
-La gran mayoria de las imágenes las he obtenido de la url: https://www.pexels.com y alguna de https://www.istockphoto.com
+## Dependencias instaladas
+
+Primero, instalaremos la aplicación de Express (app Express) con el siguiente comando: 
+~~~
+npx express-generator --ejs nodepop
+~~~
+Una vez, instalada, desde la consola y/o terminal, nos situaremos dentro de la carpeta nodepop e instalaremos las dependencias con el siguiente comando:
+~~~
+npm install
+~~~
+En este punto, ya podremos ejecutar nuestra aplicación para probar que podemos acceder a la URL: http://localhost:3000 con el comando:
+~~~
+node ./bin/www
+~~~
+O bien:
+~~~
+npm run start ó npm start
+~~~
+Necesitaremos descargar MongoDB en local [URL Available Downloads Mongodb] (https://www.mongodb.com/try/download/community), según nuestra plataforma (Windows, Ubunto, macOS, Amazon Linux, etc..)
 
 ## Comando para arrancar MongoDB (mac/linux)
 
 ~~~
 ./bin/mongod --dbpath ./data/db
 ~~~
+
+En Windows, el mongod se instala como demonio o servicio (MongoDB Server), comprobaremos que se esté ejecutando.
+
+## Cliente de MongoDB (mac/linux/windows)
+
+En la carpeta dónde se haya instalado MongoDB, tendremos que buscar el cliente de mongoDB (fichero mongo.exe) para ejecutarlo en nuestro proyecto en una nueva terminal.
+
+![Imagen ejecutar cliente mongo](E:\Curso web Keep Coding\04. Desarrollo de Backend\Recortes Documentación Práctica\clientemongo.png)
+
+## Instalación de mongoose
+
+A continuación, instalaremos una librería llamada mongoose que es una herramienta que nos permite interactuar con la base de datos de MongoDB, con el siguiente comando:
+~~~ 
+npm i mongoose
+~~~
+
+## Inicialización de la base de datos
+
+Para inicializar nuestra colección de anuncios de nuestra base de datos, ejecutaremos el siguiente  comando:
+~~~
+npm run installDB
+~~~
+ 
+Este comando llama al script que elimina todos los documentos de nuestra colección, e inserta los documentos dado un fichero JSON (anuncios.json) que se encuentra dentro de la carpeta /lib/scripts.
 
 ## API Methods
 
@@ -21,7 +63,7 @@ Get a list of anuncios
 
 Petición o URL: http://localhost:3000/api/anuncios
 
-JSON devuelto:
+JSON devuelto (anuncios.json):
 ~~~
 [
 {
@@ -175,3 +217,9 @@ En la aplicación de Postman, seleccionaremos el método DELETE con la url del a
 En este caso no rellenamos ningún dato en postman y nos devuelve el status 200.
 En la consola de node vemos la siguiente entrada:
 DELETE /api/anuncios/601d75ce8a22ccdf688603f3 200 4.957 ms - -
+
+##### Imágenes del proyecto
+
+Las imágenes usadas en el proyecto son de las siguientes webs gratuitas:
+- [https://www.pexels.com] (https://www.pexels.com) 
+- [https://www.istockphoto.com] (https://www.istockphoto.com) 
