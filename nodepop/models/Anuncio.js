@@ -10,12 +10,32 @@ const anuncioSchema = mongoose.Schema({
     venta:  {type:Boolean, index:true},
     precio: {type:Number, index:true}, 
     foto: String,
-    tags: [{type:String, index:true}]
+    tags: [{type:String, index:true}], 
+    createdAt: {type: Date}
 }
 , {
     collection: 'anuncios'  // para evitar la pluralizacion, le indicamos que colección va a usar
 });
 
+// Indice por texto
+//anuncioSchema.Index( { nombre: 'text'} );
+
+// Define query helper, son como métodos de instancia 
+anuncioSchema.query.byName = function (nombre) {
+    return this.where({ nombre: new RegExp(nombre, 'i') });
+};
+
+//para llamarlo en el controlador 
+// Anuncio.find().byName('Taza').exec((err, ads) => {
+//     console.log(ads);
+// });
+
+// Ejemplo de método de instancia
+anuncioSchema.methods.crear = function() {
+     this.createdAt = Date.now();
+     return this.save();
+}
+  
 // En los métodos de mongoose no usar Arrow Functions para no tener problemas con el this
 // es un método que no está dentro de mongoose
 anuncioSchema.statics.lista = function (filtro, limit, skip, fields, sort){

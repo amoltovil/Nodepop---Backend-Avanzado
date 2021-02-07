@@ -8,59 +8,70 @@ const Anuncio = require('../models/Anuncio');
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   res.locals.tipoanuncios ='Anuncios Ventas / Anuncios Búsqueda';
-  //res.render('index', { title: 'NodePOP' });
-
-  //res.locals.valorInyeccion='<script>alert("código inyectado")</script>';
   
-  // const segundoActual = (new Date()).getSeconds();
-  // res.locals.condicion = {
-  //   segundo: segundoActual,
-  //   esPar: segundoActual % 2 === 0
-  // };
+  try {
 
-  // res.locals.users = [
-  //   {name:'Smith', age:31, imagen: 'movil.jpg'}, 
-  //   {name:'Brown', age:39 }, 
-  //   {name:'Jones', age:22}
-  // ];
+    var precios = [];
+    var filterPrices;
 
+    const nombre = req.query.nombre;
+    const venta = req.query.venta;
+    const precio = req.query.precio;
+    const tags = req.query.tags;
 
-try {
+    const limit = parseInt(req.query.limit);  //lo convierte a num porque todo en req es string
+    const skip = parseInt(req.query.skip);   // para paginar skip
+    const fields = req.query.fields;
+    //http://localhost:3000/api/anuncios/?fields=precio%20name%20-_id
+    const sort = req.query.sort;
+    //http://localhost:3000/api/anuncios/?sort=precio%20-nombre
+    // ordena por precio ascendente y nombre descendente
 
-  const nombre = req.query.nombre;
-  const venta = req.query.venta;
-  const precio = req.query.precio;
-  const tags = req.query.tags;
+    const filtro = {}
+    if (nombre) {
+        filtro.nombre = new RegExp('^' + nombre, "i")
+      //filtro.nombre = nombre
+    }
+    if (venta) {
+        filtro.venta = venta
+    }
+    if (precio) {
+        if (precio.includes('-')) {
 
-  const limit = parseInt(req.query.limit);  //lo convierte a num porque todo en req es string
-  const skip = parseInt(req.query.skip);   // para paginar skip
-  const fields = req.query.fields;
-  //http://localhost:3000/api/anuncios/?fields=age%20name%20-_id
-  const sort = req.query.sort;
-  //http://localhost:3000/api/anuncios/?sort=age%20-name
-  // ordena por edad ascendente y edad descendente
+            precios = precio.split('-');
+          
+            if (precios.length == 2) {
+               
+                if (!isNaN(parseFloat(precios[0])) && !isNaN(parseFloat(precios[1]))) {                    
+                    filterPrices ={ $gte: parseFloat(precios[0]), $lte: parseFloat(precios[1]) }
+                } else if (isNaN(parseFloat(precios[0])) && !isNaN(parseFloat(precios[1]))) {
+                    // buscará los anuncios que sean menores a este precio    
+                    filterPrices ={ $lte: parseFloat(precios[1]) }
+                } else if (!isNaN(parseFloat(precios[0])) && isNaN(parseFloat(precios[1]))) {
+                    // buscara los anuncios de precio mayor a este
+                    filterPrices ={ $gte: parseFloat(precios[0]) }
+                }
+        
+                filtro.precio = filterPrices
+            } 
 
-  const filtro = {}
-  if (nombre) {
-      filtro.nombre = nombre
-  }
-  if (venta) {
-      filtro.venta = venta
-  }
-  if (precio) {
-      filtro.precio = precio
-  }
-  if (tags) {
-    filtro.tags = {$in: tags};
-  }
+        } else {
+            // solo nos pasan un precio, buscaremos solo por este
+            filtro.precio = precio
+        }
+    }
   
-  const resultado = await Anuncio.find({});
-  res.render('index', {resultado} );
+   if (tags) {
+      filtro.tags = {$in: tags};
+    }
+ 
+    // const resultado = await Anuncio.find({});
+    const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort)//await Anuncio.lista({ name : name});
+    res.render('index', {resultado} );
 
-} catch (err) {
+  } catch (err){
     next(err);
-}
-  
+  }
 });
 
 // middleware que atiende peticiones GET /parametroenruta/*
@@ -94,16 +105,6 @@ router.get('/parametros/:dato/piso/:piso/puerta/:puerta', [
   console.log(req.params);
   res.send('He recibido el dato:' + dato);
 });
-
-// recibir datos en query-string
-// /querystring?dato=20
-//http://localhost:3000/querystring?dato=20&otrodato=azul
-// router.get('/querystring', (req, res, next)=>{
-//   const dato = req.query.dato;
-//   console.log(req.query);
-//   res.send('He recibido el dato:' + dato);
-
-// });
 
 // Validado, podemos poner tantas validaciones como queramos metidas en un array
 //http://localhost:3000/querystring?dato=20&?talla=42

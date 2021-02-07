@@ -11,7 +11,7 @@ const anunciosData = require('./anuncios.json');
     venta: true, 
     precio: 30, 
     foto:"zapatillas.jpg",
-    tag: ["lifestyle"] 
+    tags: ["lifestyle"], 
 });
 
 pruebaAnuncio.save(function (err, anuncioCreado){
