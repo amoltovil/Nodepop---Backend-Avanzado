@@ -831,5 +831,3 @@ Las imágenes utilizadas en el proyecto se han obtenido de las siguientes webs g
 - [Pexels.com] (https://www.pexels.com) 
 - [istockphoto.com] (https://www.istockphoto.com) 
 
-
-% Autor: Alicia Moltó Vilanova
