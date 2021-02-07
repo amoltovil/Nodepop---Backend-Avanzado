@@ -32,7 +32,7 @@ En Windows, el mongod se instala como demonio o servicio (MongoDB Server), compr
 
 En la carpeta dónde se haya instalado MongoDB, tendremos que buscar el cliente de mongoDB (fichero mongo.exe) para ejecutarlo en nuestro proyecto en una nueva terminal.
 
-![Imagen ejecutar cliente mongo](__dirname/images/docum/clientemongo.png)
+![Imagen ejecutar cliente mongo](/nodepop/public/images/docum/clientemongo.png)
 
 ## Instalación de mongoose
 
