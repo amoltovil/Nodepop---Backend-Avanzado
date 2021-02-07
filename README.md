@@ -2,6 +2,12 @@
 
 La gran mayoria de las imágenes las he obtenido de la url: https://www.pexels.com y alguna de https://www.istockphoto.com
 
+## Comando para arrancar MongoDB (mac/linux)
+
+~~~
+./bin/mongod --dbpath ./data/db
+~~~
+
 ## API Methods
 
 ### GET /apiv1/anuncios 
@@ -16,7 +22,7 @@ Get a list of anuncios
 Petición o URL: http://localhost:3000/api/anuncios
 
 JSON devuelto:
-
+~~~
 [
 {
 "tags": [
@@ -67,6 +73,7 @@ JSON devuelto:
 "__v": 0
 }
 ]
+~~~
 
 ### GET /api/anuncios/:id
 
@@ -76,7 +83,7 @@ Obtiene la lista de los distintos tags creados dentro de la colección de anunci
 La llamada a la api se lanza con la siguiente petición URL: http://localhost:3000/api/tags
 
 El resultado de la api es un fichero JSON:
-
+~~~
 [
 "animals",
 "fornitures",
@@ -86,7 +93,7 @@ El resultado de la api es un fichero JSON:
 "motor",
 "work"
 ]
-
+~~~
 ### POST /api/anuncios
 
 Crea un nuevo anuncio.
