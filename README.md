@@ -2,7 +2,7 @@
 
 ## Introducción 
 
-Bienvenido a la API Nodepop, esta API nos ayudará a extraer información de anuncios de artículos que están disponibles para su venta o para buscar, como por ejemplo: búsqueda de casa, trasteros, animales de compañia, etc.. La información de los anuncios es: nombre, precio, si el articulo se vende o se busca, la imagen del anuncio y la tipologia o tags a la que pertenece. Un mismo anuncio puede estar en varias tipologias o tags. 
+Bienvenido a la API Nodepop, esta API nos ayudará a extraer información de anuncios que están disponibles tanto para la venta como para buscar, es decir, en el caso de búsqueda, búsqueda de casa, alquiler de trasteros, animales de compañia, etc.. La información almacenada de los anuncios es su nombre, precio, si el articulo se vende o se busca, la imagen del anuncio y la tipologia o tags a la que pertenece. Un mismo anuncio puede estar en varias tipologias o tags. 
 
 La documentación explica como familiarizarse con los recursos disponibles y cómo consumirlos con solicitudes HTTP tanto desde la ruta de la/s APIs, como desde la ruta del propio website.
 
@@ -18,7 +18,7 @@ Una vez, instalada, desde la consola y/o terminal, nos situaremos dentro de la c
 ~~~
 npm install
 ~~~
-En este punto, ya podremos ejecutar nuestra aplicación para probar que podemos acceder a la URL: http://localhost:3000 con el comando:
+En este punto, ya podremos ejecutar nuestra aplicación para probar que podemos acceder a la URL: http://localhost:3000 de nuestro website con el comando:
 ~~~
 node ./bin/www
 ~~~
@@ -68,6 +68,17 @@ npm run start
 ~~~
 
 ## API Methods
+
+### ROUTES API
+
+Las llamadas a la API se podrán realizar desde las siguientes rutas o routers:
+
+- /apiv1/anuncios 
+- /api/anuncios
+- /api/tags
+
+Ejemplos: http://localhost:3000/apiv1/anuncios, http://localhost:3000/api/anuncios, http://localhost:3000/api/tags
+
 
 ### GET /apiv1/anuncios 
 
@@ -488,7 +499,7 @@ Si no se ha insertado ningún anuncio nuevo, la respuesta a esta llamada nos dev
 
 ### GET /api/anuncios 
 
-Implementamos en el API Nodepop una función que nos devuelve en un fichero en formato JSON todos los anuncios definidos en la colección anuncios.
+Implementamos en el API Nodepop una función que nos devuelve en un fichero de formato JSON todos los anuncios definidos en la colección anuncios.
 
 - #### Petición URL: http://localhost:3000/api/anuncios
 
@@ -500,18 +511,90 @@ Un fichero JSON que contendrá todos los anuncios definidos en la colección anu
 
 Para abreviar explicamos a continuación los distintos tipos de filtros que podemos aplicar tanto en la ruta /api/anuncios como en /apiv1/anuncios
 
-- Ejemplos:
-    1. Lista de anuncios con páginación: 
-    2. Lista de anuncios con filtro por tags:
-    3. Lista de anuncios por tipo de anuncio (Venta ó Búsqueda):
-    4. Lista de anuncios por rango de precios:
-    5. Lista de anuncios cuyo nombre empiece por una palabra:
-    6. Lista de anuncios ordenada por precio y nombre:
-    7. Lista de anuncios con varios filtros:
+- #### Ejemplos:
+
+    **1. Lista de anuncios con páginación** 
+
+    Si mostramos los anuncios de 10 en 10 en cada pagína, estas serían las llamadas http a realizar para 
+    la 1ª Página:  http://localhost:3000/api/anuncios/?skip=0&limit=10 
+    para la 2ª página: http://localhost:3000/api/anuncios/?skip=10&limit=10
+    y siguiente página: http://localhost:3000/api/anuncios/?skip=20&limit=10
+
+    **2. Lista de anuncios con filtro por tags** 
+
+    Podremos buscar por uno o varios tags (separados por comas)
+
+    http://localhost:3000/api/anuncios/?tags=work,motor
+    http://localhost:3000/api/anuncios/?tags=animals
+
+    **3. Lista de anuncios por tipo de anuncio (Venta ó Búsqueda)**
+
+    http://localhost:3000/api/anuncios/?venta=false
+    Obtiene los anuncios de tipo Se Busca
+
+    http://localhost:3000/api/anuncios/?venta=true
+    Obtiene los anuncios de tipo Se Vende
+
+    **4. Lista de anuncios por rango de precios**
+
+    http://localhost:3000/api/anuncios/?precio=500-5000
+    Obtiene los anuncios cuyo precio es mayor o igual a 500 y menor o igual a 5000
+
+    http://localhost:3000/api/anuncios/?precio=-10000
+    Obtiene los anuncios cuyo precio es menor o igual a 10000
+
+    http://localhost:3000/api/anuncios/?precio=50000-
+    Obtiene los anuncios cuyo precio es mayor a 50000
+
+    **5. Lista de anuncios cuyo nombre empiece por una palabra**
+
+    http://localhost:3000/api/anuncios/?nombre=COC
+    Obtiene los anuncios que comienzan por la palabra COC
+
+    **6. Lista de anuncios con filtros de ordenación**
+
+    Podemos ordenar por varios campos separándolos por espacios. 
+
+    `http://localhost:3000/api/anuncios/?sort=precio -nombre`
+    Obtiene los anuncios ordenados por precio ascendente y por nombre descendentemente.
+
+    `http://localhost:3000/api/anuncios/?sort=precio nombre`
+    Obtiene los anuncios ordenados por precio ascendente y por nombre ascendentemente.
+
+    **7. Lista de anuncios que solo muestre algunos campos**
+    
+    `http://localhost:3000/api/anuncios/?fields=foto venta`
+    Obtiene los anuncios con los campos foto y tipo de venta
+
+    `http://localhost:3000/api/anuncios/?fields=precio nombre venta -_id`
+    Obtiene los anuncios con los campos que queramos seleccionar separados por espacios, en este caso precio, nombre y tipo de venta, además si queremos eliminar el campo _id, se lo podemos indicar con -_id
+
+    **8. Lista de anuncios con varios filtros**
+
+    `http://localhost:3000/api/anuncios?tag=mobile&venta=false&nombre=ip&precio=50-&skip=0&limit=2&sort=precio`
+    La consulta a la colección anuncios obtiene (response) un documento anuncio que cumple todos los filtros que le hemos hecho en la petición http (request).
+    
+    *Resultado ejemplo 8*
+    ~~~
+    [
+    {
+    "tags": [
+        "lifestyle",
+        "mobile"
+        ],
+    "_id": "6020322e1e2e782ad8c680ae",
+    "nombre": "iPhone 3GS",
+    "venta": false,
+    "precio": 50,
+    "foto": "movil.jpg",
+    "__v": 0
+    }
+    ]
+    ~~~
 
 #### Resultado 
 
-Un fichero JSON que contendrá los anuncios que cumplan los filtros que hayamos establecido en la llamada http.
+Un fichero en formato JSON que nos muestra los datos resultantes de realizar la consulta a la base de datos según los filtros que hayamos establecido en la llamada http.
 
 ### GET /api/anuncios/:id
 
@@ -551,7 +634,7 @@ Un fichero JSON con el anuncio solicitado.
 
 ### GET /api/tags
 
-Obtiene la lista de los distintos tags o tipologias creados dentro de la colección de anuncios
+Obtiene la lista de los distintos tags o tipologias creados dentro de la colección de anuncios.
 
 - #### Petición URL: http://localhost:3000/api/tags
 
@@ -569,6 +652,10 @@ El resultado de la api es un fichero JSON, siempre que no se hayan insertado má
 "work"
 ]
 ~~~
+
+## API Methods POST, PUT & DELETE
+
+Estos métodos se han probado desde la aplicación Postman que nos podemos descargar de su website [Site PostMan](https://www.postman.com). 
 
 ### POST /api/anuncios
 
@@ -625,7 +712,7 @@ Devuelve el JSON actualizado porque en nuestro código le hemos incluido en la l
             useFindAndModify: false
         });`
 
-En la consola de node nos muestra lo siguiente:
+En la consola/terminal de node nos muestra lo siguiente:
 PUT /api/anuncios/601ff2ac30a2ad4018c02b11 200 6.649 ms - 178
 
 ![Imagen de actualización de anuncio desde POSTMAN](/nodepop/public/images/docum/updateanuncio.png)
@@ -659,8 +746,86 @@ DELETE /api/anuncios/601ff2ac30a2ad4018c02b11 200 3.698 ms - -
 
 ![Imagen de delete anuncio desde POSTMAN](/nodepop/public/images/docum/deleteanuncio.png)
 
+## WEBSITE Methods
+
+### ROUTE WEBSITE
+
+La Base URL de nuestro website es la siguiente: http://localhost:3000/
+
+### GET Home Page
+
+Los mismos fltros que hemos obtenido con los métodos de nuestra API nodepop se pueden aplicar también en nuestro WEBSITE. Adjuntamos ejemplos de cada una de las llamadas.
+
+- #### Resultado
+
+Los resultados obtenidos se mostraran en una página HTML renderizada con los datos obtenidos de nuestra consulta a la BD.
+
+- #### Ejemplos de peticiones con distintos filtros al Website
+
+    **1. Lista de anuncios con páginación**
+
+    Si mostramos los anuncios de 10 en 10 en cada pagína, estas serían las llamadas http a realizar para la 1ª Página:  http://localhost:3000/?skip=0&limit=10 
+    para la 2ª página: http://localhost:3000/?skip=10&limit=10
+    y siguiente página: http://localhost:3000/?skip=20&limit=10
+
+    **2. Lista de anuncios con filtro por Tags** 
+
+    Podremos seleccionar por uno o varios tags separados por el carácter ','
+
+    http://localhost:3000/?tags=motor
+    http://localhost:3000/?tags=fornitures,animals
+    http://localhost:3000/?tags=lifestyle,motor,fornitures
+
+    **3. Lista de anuncios por tipo de anuncio (Venta ó Búsqueda)**
+    http://localhost:3000/?venta=false
+    Obtiene los anuncios de tipo Búsqueda (Se Busca)
+    http://localhost:3000/?venta=true
+    Obtiene los anuncios de tipo Venta (Se Vende)
+
+    **4. Lista de anuncios por rango de precios**
+
+    http://localhost:3000/?precio=20-500
+    Obtiene los anuncios cuyo precio es mayor o igual a 20 y menor o igual a 500
+    http://localhost:3000/?precio=-10000
+    Obtiene los anuncios cuyo precio es menor o igual a 10000
+    http://localhost:3000/?precio=1000-
+    Obtiene los anuncios cuyo precio es mayor a 1000
+
+    **5. Lista de anuncios cuyo nombre empiece por una palabra**
+
+    http://localhost:3000/?nombre=Ca
+    Obtiene los anuncios que comienzan por Ca
+
+    **6. Lista de anuncios con filtros de ordenación**
+    Podemos ordenar por varios campos a la vez separados por espacios
+
+    http://localhost:3000/?sort=venta
+    Obtiene los anuncios ordenados por tipologia de venta, en este caso, primero muestra los anuncios de se busca (venta = false) y luego los de se vende (venta = true).
+
+    http://localhost:3000/?sort=venta%20precio
+    Obtiene los anuncios ordenados por tipologia de venta y luego por precio ascendente.
+
+    **7. Lista de anuncios que solo muestre algunos campos**
+
+    http://localhost:3000/?fields=precio%20nombre%20venta
+    Obtiene los datos de precio, nombre y tipo de venta en la pagina HTML sin el campo de foto ni los tags de cada anuncio.
+
+    http://localhost:3000/?fields=foto%20precio%20venta
+    Muestra en la página HTML renderizada solo los datos de foto, precio y venta. 
+
+    **8. Lista de anuncios con varios filtros**
+
+    `http://localhost:3000/?tag=mobile&venta=false&nombre=ip&precio=50-&skip=0&limit=2&sort=precio`
+     La consulta a la colección anuncios obtiene (response) un documento anuncio que cumple todos los filtros que le hemos hecho en la petición http (request).
+     En nuestro website solo muestra un documento que cumple todos los requisitos.
+
+     ![Imagen resultado ejemplo 8 en website](/nodepop/public/images/docum/resultado.png)
+
 ##### Imágenes del proyecto
 
-Las imágenes usadas en el proyecto son de las siguientes webs gratuitas:
+Las imágenes utilizadas en el proyecto se han obtenido de las siguientes webs gratuitas:
 - [Pexels.com] (https://www.pexels.com) 
 - [istockphoto.com] (https://www.istockphoto.com) 
+
+
+% Autor: Alicia Moltó Vilanova

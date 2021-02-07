@@ -16,19 +16,21 @@
   <div class='Anuncios'>
     <% resultado.forEach(anuncio => {%>
      <div class ='ad'>
-           
+      <% if (anuncio.foto) { %>
        <img class ='img_ad' src="/images/anuncios/<%= anuncio.foto %>" alt="Imagen anuncio"> 
-    
+       <% } %>
         <h3>
          <%= anuncio.nombre %>
         </h3>
         <p> Precio: <%= anuncio.precio %> € </p>
-        <% if (anuncio.venta) { %>
+        <% if (anuncio.venta === true) { %>
           <p> Se Vende </p>
-        <% } else { %>
+        <% } else if (anuncio.venta === false) { %>
           <p> Se Busca </p>
          <% } %>
-         <p>Tags: <%=anuncio.tags %></p>
+         <% if (anuncio.tags) { %>
+          <p>Tags: <%=anuncio.tags %></p>
+          <% } %>
       </div>
     
      <%}) %>

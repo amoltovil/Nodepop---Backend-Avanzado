@@ -10,6 +10,7 @@ router.get('/', async function(req, res, next) {
     try {
 
         var precios = [];
+        var vtags=[];
         var filterPrices;
     
         const nombre = req.query.nombre;
@@ -20,7 +21,7 @@ router.get('/', async function(req, res, next) {
         const limit = parseInt(req.query.limit);  //lo convierte a num porque todo en req es string
         const skip = parseInt(req.query.skip);   // para paginar skip
         const fields = req.query.fields;
-        //http://localhost:3000/api/anuncios/?fields=precio%20name%20-_id
+        //http://localhost:3000/api/anuncios/?fields=precio%20nombre%20-_id
         const sort = req.query.sort;
         //http://localhost:3000/api/anuncios/?sort=precio%20-nombre
         // ordena por precio ascendente y nombre descendente
@@ -52,10 +53,17 @@ router.get('/', async function(req, res, next) {
                 filtro.precio = precio    
             }
         }
+        // podremos buscar por varios tags separados por comas
         if (tags) {
-            filtro.tags = {$in: tags};
+            if (tags.includes(',')) {
+               vtags = tags.split(',');
+               filtro.tags = {$in: vtags};
+            } else {
+               filtro.tags = {$in: tags};    
+            }            
         }
 
+        console.log(filtro)
         //await Anuncio.find(); // funciona con una función async
         const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort)//await Anuncio.lista({ name : name});
         res.json(resultado);

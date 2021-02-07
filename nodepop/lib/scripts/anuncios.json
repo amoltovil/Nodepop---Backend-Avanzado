@@ -18,7 +18,7 @@
 		"tags": ["work","lifestyle"]
 	},
 	{ "nombre": "Applewatch", 
-	   "venta": false, 
+	   "venta": true, 
 	   "precio":250.00, 
 	   "foto":"applewatch.jpg", 
 	   "tags": ["lifestyle", "mobile"]
@@ -162,7 +162,7 @@
 		"tags": ["mobile","lifestyle", "work"]
 	},
 	{ "nombre": "Taburete", 
-	   "venta": false, 
+	   "venta": true, 
 	   "precio": 49.99, 
 	   "foto":"taburete.jpg", 
 	   "tags": ["lifestyle", "work", "fornitures"]

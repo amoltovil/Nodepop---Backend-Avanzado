@@ -22,6 +22,7 @@ router.get('/', async function(req, res, next) {
     try {
 
         var precios = [];
+        var vtags= [];
        
         const nombre = req.query.nombre;
         const venta = req.query.venta;
@@ -63,11 +64,17 @@ router.get('/', async function(req, res, next) {
                 filtro.precio = precio
             }
         }
-       
+       // podremos buscar por varios tags separados por comas
         if (tags) {
-            filtro.tags = {$in: tags};
-        }
-        
+            if (tags.includes(',')) {
+               vtags = tags.split(',');
+               filtro.tags = {$in: vtags};
+            }
+            } else {
+               filtro.tags = {$in: tags};    
+            }
+
+        console.log(filtro)        
         const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort) 
         res.json(resultado);
 
