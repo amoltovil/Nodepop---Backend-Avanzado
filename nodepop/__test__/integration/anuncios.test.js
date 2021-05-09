@@ -80,6 +80,17 @@ describe('Testing /api/anuncios', () => {
                 })
         })
 
+       // es el mismo test que el de arriba
+        it.skip("should get all ads", async () => {
+              await request(app)
+                .get("/api/anuncios")
+                .set("Accept", "application/json")
+                .set('Authorization', token)
+                .expect("Content-Type", /json/)
+                .expect(200);
+        });
+          
+
     describe('GET /api/anuncios/:id', () => {
             // it('should fetch 1 single ad for id = ', async (done) => {
             //   const res = await request(app)
@@ -97,12 +108,45 @@ describe('Testing /api/anuncios', () => {
                     .then((response) => {
                         expect(response.statusCode).toEqual(404);
                     });
+            })
         })
+        
     })
+
+    describe('POST /api/anuncios/', () => {
+        test.skip("POST /api/anuncios", async () => {
+            const data = {
+                nombre: "prueba test", 
+                venta:  true,
+                precio: 10, 
+                foto: '',
+                tags: ['lifestyle', 'work'] 
+            }
+    
+            await request(app)
+                .post("/api/anuncios")
+                .set('Authorization', token)
+                .send(data)
+                .expect(201)
+                .then(async (response) => {
+                    // Check the response
+                    expect(response.body._id).toBeTruthy()
+                    expect(response.body.nombre).toBe(data.nombre)
+                    expect(response.body.venta).toBe(data.venta)
+                    expect(response.body.precio).toBe(data.precio)
+                    expect(response.body.foto).toBe(data.foto)
+                    expect(response.body.tags).toBe(data.tags)
+                    // Check the data in the database
+                    const post = await Post.findOne({ _id: response.body._id })
+                    expect(post).toBeTruthy()
+                    expect(post.nombre).toBe(data.nombre)
+                    expect(post.venta).toBe(data.venta)
+                    expect(post.precio).toBe(data.precio)
+                    expect(post.foto).toBe(data.foto)
+                    expect(post.tags).toBe(data.tags)
+                })
+        })
         
     })
 })
-
-
-
 

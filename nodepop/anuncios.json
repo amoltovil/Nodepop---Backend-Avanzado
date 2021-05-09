@@ -1,206 +1,357 @@
 [
-	{ "nombre": "Bicicleta", 
-		"venta": true, 
-		"precio": 230.15, 
+	{
+		"nombre": "Bicicleta",
+		"venta": true,
+		"precio": 230.15,
 		"foto": "bicicleta.jpg",
-		"tags": ["lifestyle", "motor"]
+		"tags": [
+			"lifestyle",
+			"motor"
+		]
 	},
-	{ "nombre": "iPhone 3GS", 
-	   "venta": false, 
-	   "precio":50.00, 
-	   "foto":"movil.jpg", 
-	   "tags": ["lifestyle", "mobile"]
+	{
+		"nombre": "iPhone 3GS",
+		"venta": false,
+		"precio": 50.00,
+		"foto": "movil.jpg",
+		"tags": [
+			"lifestyle",
+			"mobile"
+		]
 	},
-	{ "nombre": "Agendas", 
-		"venta": true, 
-		"precio":25, 
+	{
+		"nombre": "Agendas",
+		"venta": true,
+		"precio": 25,
 		"foto": "agenda.jpg",
-		"tags": ["work","lifestyle"]
+		"tags": [
+			"work",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Applewatch", 
-	   "venta": true, 
-	   "precio":250.00, 
-	   "foto":"applewatch.jpg", 
-	   "tags": ["lifestyle", "mobile"]
+	{
+		"nombre": "Applewatch",
+		"venta": true,
+		"precio": 250.00,
+		"foto": "applewatch.jpg",
+		"tags": [
+			"lifestyle",
+			"mobile"
+		]
 	},
-	{ "nombre": "Bicicleta niña", 
-		"venta": true, 
-		"precio": 50, 
+	{
+		"nombre": "Bicicleta niña",
+		"venta": true,
+		"precio": 50,
 		"foto": "bici-peque.jpg",
-		"tags": ["motor","lifestyle"]
+		"tags": [
+			"motor",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Bowl", 
-	   "venta": true, 
-	   "precio": 6.99, 
-	   "foto":"bowl.jpg", 
-	   "tags": ["lifestyle", "kitchen"]
+	{
+		"nombre": "Bowl",
+		"venta": true,
+		"precio": 6.99,
+		"foto": "bowl.jpg",
+		"tags": [
+			"lifestyle",
+			"kitchen"
+		]
 	},
-	{ "nombre": "Cachorros Labrador", 
-		"venta": false, 
-		"precio": 250, 
+	{
+		"nombre": "Cachorros Labrador",
+		"venta": false,
+		"precio": 250,
 		"foto": "cachorros.jpg",
-		"tags": ["lifestyle"]
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Cafetera", 
-	   "venta": true, 
-	   "precio": 15.99, 
-	   "foto":"cafetera.jpg", 
-	   "tags": ["lifestyle", "kitchen"]
+	{
+		"nombre": "Cafetera",
+		"venta": true,
+		"precio": 15.99,
+		"foto": "cafetera.jpg",
+		"tags": [
+			"lifestyle",
+			"kitchen"
+		]
 	},
-	{ "nombre": "Casa", 
-		"venta": false, 
-		"precio": 100.000, 
+	{
+		"nombre": "Casa",
+		"venta": false,
+		"precio": 100.000,
 		"foto": "casa.jpg",
-		"tags": ["lifestyle"]
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Olla de cocina", 
-	   "venta": true, 
-	   "precio": 24.99, 
-	   "foto":"cazuela.jpg", 
-	   "tags": ["lifestyle", "kitchen"]
+	{
+		"nombre": "Olla de cocina",
+		"venta": true,
+		"precio": 24.99,
+		"foto": "cazuela.jpg",
+		"tags": [
+			"lifestyle",
+			"kitchen"
+		]
 	},
-	{ "nombre": "Coche Renault antiguo", 
-		"venta": true, 
-		"precio": 5000, 
+	{
+		"nombre": "Coche Renault antiguo",
+		"venta": true,
+		"precio": 5000,
 		"foto": "coche_renault.jpg",
-		"tags": ["motor","lifestyle"]
+		"tags": [
+			"motor",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Coche Mercedes", 
-	   "venta": true, 
-	   "precio": 300000, 
-	   "foto":"cochelujo.jpg", 
-	   "tags": ["lifestyle", "work", "motor"]
-	}, 
-	{ "nombre": "Espejo Vintage", 
-		"venta": true, 
-		"precio": 39.99, 
+	{
+		"nombre": "Coche Mercedes",
+		"venta": true,
+		"precio": 300000,
+		"foto": "cochelujo.jpg",
+		"tags": [
+			"lifestyle",
+			"work",
+			"motor"
+		]
+	},
+	{
+		"nombre": "Espejo Vintage",
+		"venta": true,
+		"precio": 39.99,
 		"foto": "espejo.jpg",
-		"tags": ["lifestyle", "fornitures"]
+		"tags": [
+			"lifestyle",
+			"fornitures"
+		]
 	},
-	{ "nombre": "Figura decorativa", 
-	   "venta": true, 
-	   "precio": 12.99, 
-	   "foto":"figura_decoracion.jpg", 
-	   "tags": ["lifestyle"]
+	{
+		"nombre": "Figura decorativa",
+		"venta": true,
+		"precio": 12.99,
+		"foto": "figura_decoracion.jpg",
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Gato", 
-		"venta": false, 
-		"precio": 100, 
+	{
+		"nombre": "Gato",
+		"venta": false,
+		"precio": 100,
 		"foto": "gato.jpg",
-		"tags": ["lifestyle", "animals"]
+		"tags": [
+			"lifestyle",
+			"animals"
+		]
 	},
-	{ "nombre": "Robot de limpieza suelos", 
-	   "venta": true, 
-	   "precio": 500, 
-	   "foto":"irobot.jpg", 
-	   "tags": ["lifestyle", "work"]
+	{
+		"nombre": "Robot de limpieza suelos",
+		"venta": true,
+		"precio": 500,
+		"foto": "irobot.jpg",
+		"tags": [
+			"lifestyle",
+			"work"
+		]
 	},
-	{ "nombre": "Jersey", 
-		"venta": true, 
-		"precio": 10, 
+	{
+		"nombre": "Jersey",
+		"venta": true,
+		"precio": 10,
 		"foto": "jersey.jpg",
-		"tags": ["lifestyle"]
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Loro", 
-	   "venta": false, 
-	   "precio": 30, 
-	   "foto":"loro.jpg", 
-	   "tags": ["lifestyle", "animals"]
+	{
+		"nombre": "Loro",
+		"venta": false,
+		"precio": 30,
+		"foto": "loro.jpg",
+		"tags": [
+			"lifestyle",
+			"animals"
+		]
 	},
-	{ "nombre": "Moto", 
-		"venta": true, 
-		"precio": 1500, 
+	{
+		"nombre": "Moto",
+		"venta": true,
+		"precio": 1500,
 		"foto": "moto.jpg",
-		"tags": ["motor","lifestyle"]
+		"tags": [
+			"motor",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Ordenador", 
-	   "venta": true, 
-	   "precio": 349.99, 
-	   "foto":"ordenador.jpg", 
-	   "tags": ["lifestyle", "work"]
+	{
+		"nombre": "Ordenador",
+		"venta": true,
+		"precio": 349.99,
+		"foto": "ordenador.jpg",
+		"tags": [
+			"lifestyle",
+			"work"
+		]
 	},
-	{ "nombre": "Planta", 
-		"venta": true, 
-		"precio": 5.50, 
+	{
+		"nombre": "Planta",
+		"venta": true,
+		"precio": 5.50,
 		"foto": "planta.jpg",
-		"tags": ["lifestyle"]
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Plantas", 
-	   "venta": true, 
-	   "precio": 6.99, 
-	   "foto":"plantas.jpg", 
-	   "tags": ["lifestyle"]
+	{
+		"nombre": "Plantas",
+		"venta": true,
+		"precio": 6.99,
+		"foto": "plantas.jpg",
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Reloj Despertador", 
-		"venta": true, 
-		"precio": 15.99, 
+	{
+		"nombre": "Reloj Despertador",
+		"venta": true,
+		"precio": 15.99,
 		"foto": "reloj_despertador.jpg",
-		"tags": ["lifestyle"]
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Reloj Mujer", 
-	   "venta": true, 
-	   "precio": 29.99, 
-	   "foto":"reloj_mujer.jpg", 
-	   "tags": ["lifestyle"]
+	{
+		"nombre": "Reloj Mujer",
+		"venta": true,
+		"precio": 29.99,
+		"foto": "reloj_mujer.jpg",
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Silla Vintage", 
-		"venta": true, 
-		"precio": 5.99, 
+	{
+		"nombre": "Silla Vintage",
+		"venta": true,
+		"precio": 5.99,
 		"foto": "silla_vieja.jpg",
-		"tags": ["lifestyle", "fornitures"]
+		"tags": [
+			"lifestyle",
+			"fornitures"
+		]
 	},
-	{ "nombre": "Sofa", 
-	   "venta": true, 
-	   "precio": 500, 
-	   "foto":"sofa.jpg", 
-	   "tags": ["lifestyle", "fornitures"]
+	{
+		"nombre": "Sofa",
+		"venta": true,
+		"precio": 500,
+		"foto": "sofa.jpg",
+		"tags": [
+			"lifestyle",
+			"fornitures"
+		]
 	},
-	{ "nombre": "Tablet Android", 
-		"venta": true, 
-		"precio": 250, 
+	{
+		"nombre": "Tablet Android",
+		"venta": true,
+		"precio": 250,
 		"foto": "tablet.jpg",
-		"tags": ["mobile","lifestyle", "work"]
+		"tags": [
+			"mobile",
+			"lifestyle",
+			"work"
+		]
 	},
-	{ "nombre": "Taburete", 
-	   "venta": true, 
-	   "precio": 49.99, 
-	   "foto":"taburete.jpg", 
-	   "tags": ["lifestyle", "work", "fornitures"]
+	{
+		"nombre": "Taburete",
+		"venta": true,
+		"precio": 49.99,
+		"foto": "taburete.jpg",
+		"tags": [
+			"lifestyle",
+			"work",
+			"fornitures"
+		]
 	},
-	{ "nombre": "Juego de tazas", 
-		"venta": true, 
-		"precio": 30, 
+	{
+		"nombre": "Juego de tazas",
+		"venta": true,
+		"precio": 30,
 		"foto": "taza.jpg",
-		"tags": ["kitchen","lifestyle"]
+		"tags": [
+			"kitchen",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Trastero de alquiler", 
-	   "venta": false, 
-	   "precio": 60, 
-	   "foto":"trastero.jpg", 
-	   "tags": ["lifestyle", "work"]
+	{
+		"nombre": "Trastero de alquiler",
+		"venta": false,
+		"precio": 60,
+		"foto": "trastero.jpg",
+		"tags": [
+			"lifestyle",
+			"work"
+		]
 	},
-	{ "nombre": "Utensilios de madera", 
-		"venta": true, 
-		"precio": 20, 
+	{
+		"nombre": "Utensilios de madera",
+		"venta": true,
+		"precio": 20,
 		"foto": "utensilios_madera.jpg",
-		"tags": ["kitchen","lifestyle"]
+		"tags": [
+			"kitchen",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Zapatillas", 
-	   "venta": true, 
-	   "precio": 30, 
-	   "foto":"zapatillas.jpg", 
-	   "tags": ["lifestyle"]
+	{
+		"nombre": "Zapatillas",
+		"venta": true,
+		"precio": 30,
+		"foto": "zapatillas.jpg",
+		"tags": [
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Limpiadora", 
-		"venta": false, 
-		"precio": 10, 
+	{
+		"nombre": "Limpiadora",
+		"venta": false,
+		"precio": 10,
 		"foto": "limpieza.jpg",
-		"tags": ["work","lifestyle"]
+		"tags": [
+			"work",
+			"lifestyle"
+		]
 	},
-	{ "nombre": "Cuidador de personas mayores", 
-	   "venta": false, 
-	   "precio": 15.99, 
-	   "foto":"cuidador.jpg", 
-	   "tags": ["lifestyle", "work"]
-	}	
+	{
+		"nombre": "Cuidador de personas mayores",
+		"venta": false,
+		"precio": 15.99,
+		"foto": "cuidador.jpg",
+		"tags": [
+			"lifestyle",
+			"work"
+		]
+	},
+	{
+		"nombre": "flores secas",
+		"venta": true,
+		"precio": 3.75,
+		"createdAt": "2021-05-09T19:51:20.640Z",
+		"foto": "flores.jpeg",
+		"tags": [
+			"lifestyle",
+			"decoration"
+		]
+	},
+	{
+		"nombre": "Pomelos",
+		"venta": true,
+		"precio": 1.25,
+		"createdAt": "2021-05-09T20:01:25.096Z",
+		"foto": "pomelo.jpeg",
+		"tags": [
+			"lifestyle"
+		]
+	}
 ]
