@@ -24,5 +24,19 @@
 	"Nombre": "Nombre",
 	"Tipo de Anuncio": "Tipo de Anuncio",
 	"Precio": "Precio",
-	"Tags": "Tags"
+	"Tags": "Tags",
+	"Ejemplos": "Ejemplos",
+	"Todos": "Todos",
+	"Paginado": "Paginado",
+	"Anuncios de compra": "Anuncios de compra",
+	"Anuncios de venta": "Anuncios de venta",
+	"Ordenado por precio ascendente": "Ordenado por precio ascendente",
+	"Ordenado por precio descendente": "Ordenado por precio descendente",
+	"Precios entre 20 € y 500 €": "Precios entre 20 € y 500 €",
+	"Nombre comience por Ca": "Nombre comience por Ca",
+	"Ordenados por tipo anuncio": "Ordenados por tipo anuncio",
+	"Muestra los campos seleccionados": "Muestra los campos seleccionados",
+	"Con tag mobile": "Con tag mobile",
+	"Con varios tags": "Con varios tags",
+	"Links a Ejemplos de Filtros": "Links a Ejemplos de Filtros"
 }

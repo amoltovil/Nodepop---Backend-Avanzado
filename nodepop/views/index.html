@@ -74,11 +74,11 @@
                     %>
                   </td>
 
-                  <td style="text-align: right"><%= anuncio.precio %> €</td>
+                  <td style="text-align: right"><%= anuncio.precio ? anuncio.precio : '' %> €</td>
                   <!-- <td><img src="<%= anuncio.foto %>"></td> -->
 
-                  <td><%= '#'+anuncio.tags.join(', #') %></td>
-                  <td><%= anuncio._id %></td>
+                  <td><%= anuncio.tags ? '#'+anuncio.tags.join(', #') :'' %></td>
+                  <td><%= anuncio._id ? anuncio._id : '' %></td>
                 </tr>
                 <% }) %>
               </tbody>
@@ -89,14 +89,21 @@
     </div>
 
     <div>
-      <p>Ejemplos:</p>
+      <p> <%= __('Links a Ejemplos de Filtros')%>:</p>
 
       <ul>
-        <li><a href="?">Todos (max. 1000)</a></li>
-        <li><a href="?start=2&limit=2">Paginado</a></li>
-        <li><a href="?sort=precio">Ordenado por precio ascendente</a></li>
-        <li><a href="?sort=-precio">Ordenado por precio descendente</a></li>
-        <li><a href="?tags=mobile">Con tag mobile</a></li>
+        <li><a href="?"> <%=__('Todos')%> </a></li>
+        <li><a href="?start=2&limit=2"><%=__('Paginado')%></a></li>
+        <li><a href="?venta=false"><%=__('Anuncios de compra')%></a></li>
+        <li><a href="?venta=true"><%=__('Anuncios de venta')%></a></li>
+        <li><a href="?sort=precio"><%=__('Ordenado por precio ascendente')%></a></li>
+        <li><a href="?sort=-precio"><%=__('Ordenado por precio descendente')%></a></li>
+        <li><a href="?precio=20-500"><%=__('Precios entre 20 € y 500 €')%></a></li>
+        <li><a href="?nombre=Ca"><%=__('Nombre comience por Ca')%></a></li>
+        <li><a href="?sort=venta"><%=__('Ordenados por tipo anuncio')%></a></li>
+        <li><a href="?fields=precio nombre venta"><%=__('Muestra los campos seleccionados')%></a></li>
+        <li><a href="?tags=mobile"><%=__('Con tag mobile')%></a></li>
+        <li><a href="?tags=lifestyle,motor,fornitures"><%=__('Con varios tags')%></a>
       </ul>
     </div>
   </div>

@@ -25,5 +25,19 @@
 	"Nombre": "Name",
 	"Tipo de Anuncio": "Ad Type",
 	"Precio": "Price",
-	"Tags": "Tags"
+	"Tags": "Tags",
+	"Ejemplos": "Examples",
+	"Todos": "Todos",
+	"Paginado": "Paged",
+	"Anuncios de compra": "On Buy/Search ads",
+	"Anuncios de venta": "On sale ads",
+	"Ordenado por precio ascendente": "Sort by ascending price",
+	"Ordenado por precio descendente": "Sort by descending price",
+	"Precios entre 20 € y 500 €": "Price between 20 € and 500 €",
+	"Nombre comience por Ca": "Name start by Ca",
+	"Ordenados por tipo anuncio": "Sort by ad type",
+	"Muestra los campos seleccionados": "Show selected fields",
+	"Con tag mobile": "With tag mobile",
+	"Con varios tags": "With various tags",
+	"Links a Ejemplos de Filtros": "Links to Filter Examples"
 }
