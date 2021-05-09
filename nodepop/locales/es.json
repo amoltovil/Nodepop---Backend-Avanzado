@@ -1,0 +1,28 @@
+{
+	"Welcome to NodePOP": "Bienvenido a NodePOP",
+	"Welcome to": "Bienvenido a",
+	"Welcome to {{title}}.": "Bienvenido a {{title}}.",
+	"Precio:": "Precio:",
+	"Se Vende": "Se Vende",
+	"Se Busca/Compra": "Se Busca/Compra",
+	"Anuncios Ventas / Anuncios Búsqueda": "Anuncios Ventas / Anuncios Compra",
+	"Tag:": {
+		"one": "Tag:",
+		"other": "Tags:"
+	},
+	"This is the page for the services": "Página de Servicios",
+	"Welcome to {{title}}": "Bienvenido a {{title}}",
+	"Services": "Servicios",
+	"Login": "Login",
+	"Invalid credentials": "Credenciales Inválidas",
+	"Privado": "Privado",
+	"Logout": "Logout",
+	"Lista de Anuncios": "Lista de Anuncios",
+	"Resultados:": "Resultados:",
+	"Documentation": "Documentación",
+	"Imagen": "Imagen",
+	"Nombre": "Nombre",
+	"Tipo de Anuncio": "Tipo de Anuncio",
+	"Precio": "Precio",
+	"Tags": "Tags"
+}

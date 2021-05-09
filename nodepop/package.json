@@ -3,23 +3,45 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "installDB": "node ./lib/scripts/install_db.js",
+    "installDB": "node install_db.js",
+    "initDB": "node initDB.js",
     "start": "node ./bin/www",
-    "dev": "cross-env PORT=3000 NODE_ENV=development DEBUG=nodepop:* nodemon"
+    "cluster": "node ./bin/cluster",
+    "dev": "cross-env PORT=3000 NODE_ENV=development DEBUG=nodepop:* nodemon",
+    "thumbnailService": "node ./microservices/thumbnailService.js",
+    "test1": "jest",
+    "test": "jest --setupFiles dotenv/config",
+    "test:watch": "jest --watch",
+    "test:int": "jest integration",
+    "test:watch:int": "jest integration --setupFiles dotenv/config --watch"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.4.1",
     "cookie-parser": "~1.4.4",
+    "cote": "^1.0.2",
     "cross-env": "^7.0.3",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-async-handler": "^1.1.4",
     "express-json-validator-middleware": "^2.1.1",
+    "express-session": "^1.17.1",
     "express-validator": "^6.9.2",
     "http-errors": "~1.6.3",
-    "mongoose": "^5.11.15",
-    "morgan": "~1.9.1"
+    "i18n": "^0.13.2",
+    "jest-extended": "^0.11.5",
+    "jimp": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
   }
 }

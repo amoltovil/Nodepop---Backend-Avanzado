@@ -38,13 +38,15 @@ anuncioSchema.methods.crear = function() {
   
 // En los métodos de mongoose no usar Arrow Functions para no tener problemas con el this
 // es un método que no está dentro de mongoose
-anuncioSchema.statics.lista = function (filtro, limit, skip, fields, sort){
+anuncioSchema.statics.lista = async function (filtro, limit, skip, fields, sort){
     const query = Anuncio.find(filtro); // no devuelve una promesa, devuelve una query que tiene un método then
     query.limit(limit);
     query.skip(skip);
     query.select(fields);
     query.sort(sort);
-    return query.exec(); // devuelve una promesa
+    
+   return query.exec(); // devuelve una promesa
+    
 };
 
 // Método para listar los distintos tags definidos

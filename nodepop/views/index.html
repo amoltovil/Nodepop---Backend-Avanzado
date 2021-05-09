@@ -1,41 +1,105 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<% include cabecera.html %>
 
-  <h1><%= title %></h1>
-  <p>Welcome to <%= title %></p>
-  <% include cabecera.html %>
-  <h2>
-  <p><%=tipoanuncios%></p>
-  </h2>
-    
-  <div class='Anuncios'>
-    <% resultado.forEach(anuncio => {%>
-     <div class ='ad'>
-      <% if (anuncio.foto) { %>
-       <img class ='img_ad' src="/images/anuncios/<%= anuncio.foto %>" alt="Imagen anuncio"> 
-       <% } %>
-        <h3>
-         <%= anuncio.nombre %>
-        </h3>
-        <p> Precio: <%= anuncio.precio %> € </p>
-        <% if (anuncio.venta === true) { %>
-          <p> Se Vende </p>
-        <% } else if (anuncio.venta === false) { %>
-          <p> Se Busca </p>
-         <% } %>
-         <% if (anuncio.tags) { %>
-          <p>Tags: <%=anuncio.tags %></p>
-          <% } %>
+<style>
+  body {
+    /* padding: 50px; */
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+
+  a {
+    color: #00b7ff;
+  }
+
+  .table {
+    color: white;
+  }
+
+  .img_ad {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    /* padding:10px; */
+    /* border: 5px solid #fff; */
+  }
+</style>
+
+<header class="masthead">
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-lg-7 my-auto">
+        <div class="header-content mx-auto">
+          <h1 class="mb-5"></h1>
+
+          <h1><%=__('Lista de Anuncios') %></h1>
+          <h3>
+            <p class="lead"><%=__('Resultados:') %> <%= resultado.length %></p>
+            <!-- <p> <%= __('Anuncios Ventas / Anuncios Búsqueda')%> </p> -->
+            <p><%= tipoanuncios %></p>
+          </h3>
+
+          <div class="container ad">
+            <table class="table table-hover ad">
+              <thead>
+                <tr>
+                  <th><%=__('Imagen') %></th>
+                  <th><%=__('Nombre') %></th>
+                  <th><%=__('Tipo de Anuncio') %></th>
+                  <th style="text-align: right"><%=__('Precio')%></th>
+                  <th>Tags</th>
+                  <th>#</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% resultado.forEach(anuncio => { %>
+                <tr>
+                  <td>
+                    <% if (anuncio.foto) { %>
+                    <img
+                      class="img_ad border"
+                      src="/images/anuncios/<%= anuncio.foto %>"
+                      alt="Imagen anuncio"
+                    />
+                    <% } else { %>
+                    <img
+                      class="img_ad border"
+                      src="/images/anuncios/notimage.png"
+                      alt="Anuncio sin imagen"
+                    />
+                    <% } %>
+                  </td>
+                  <td><%= anuncio.nombre ? anuncio.nombre.toUpperCase() : '' %></td>
+
+                  <td>
+                    <%= anuncio.venta ? __('Se Vende') : __('Se Busca/Compra')
+                    %>
+                  </td>
+
+                  <td style="text-align: right"><%= anuncio.precio %> €</td>
+                  <!-- <td><img src="<%= anuncio.foto %>"></td> -->
+
+                  <td><%= '#'+anuncio.tags.join(', #') %></td>
+                  <td><%= anuncio._id %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    
-     <%}) %>
+    </div>
 
+    <div>
+      <p>Ejemplos:</p>
+
+      <ul>
+        <li><a href="?">Todos (max. 1000)</a></li>
+        <li><a href="?start=2&limit=2">Paginado</a></li>
+        <li><a href="?sort=precio">Ordenado por precio ascendente</a></li>
+        <li><a href="?sort=-precio">Ordenado por precio descendente</a></li>
+        <li><a href="?tags=mobile">Con tag mobile</a></li>
+      </ul>
+    </div>
   </div>
+</header>
 
-  </body>
-</html>
+<% include pie.html %>

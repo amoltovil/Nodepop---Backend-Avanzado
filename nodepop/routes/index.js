@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
 const {query, param, body, validationResult} = require('express-validator'); // destructuring
 const { Validator, ValidationError } = require('express-json-validator-middleware');
 const Anuncio = require('../models/Anuncio');
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-  res.locals.tipoanuncios ='Anuncios Ventas / Anuncios Búsqueda';
+router.get('/', async function (req, res, next) {
+  
+  res.locals.tipoanuncios = res.locals.__('Anuncios Ventas / Anuncios Búsqueda');
+  // es lo mismo que la sentencia anterior
+  //res.locals.tipoanuncios = res.__('Anuncios Ventas / Anuncios Búsqueda');  
   
   try {
 
@@ -26,7 +28,7 @@ router.get('/', async function(req, res, next) {
     const sort = req.query.sort;
     //http://localhost:3000/api/anuncios/?sort=precio%20-nombre
     // ordena por precio ascendente y nombre descendente
-
+   
     const filtro = {}
     if (nombre) {
         filtro.nombre = new RegExp('^' + nombre, "i")
@@ -69,11 +71,9 @@ router.get('/', async function(req, res, next) {
       }
     }
 
-    console.log(filtro)
-    // const resultado = await Anuncio.find({});
-    const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort)//await Anuncio.lista({ name : name});
+    const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort)
     res.render('index', {resultado} );
-
+    
   } catch (err){
     next(err);
   }

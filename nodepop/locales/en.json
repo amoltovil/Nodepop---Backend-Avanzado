@@ -1,0 +1,29 @@
+{
+	"Welcome to NodePOP": "Welcome to NodePOP",
+	"Welcome to": "Welcome to",
+	"LISTA DE ANUNCIOS": "ADS LIST",
+	"Welcome to {{title}}.": "Welcome to {{title}}.",
+	"Precio:": "Price:",
+	"Se Vende": "On Sale",
+	"Se Busca/Compra": "On Search/Buy",
+	"Anuncios Ventas / Anuncios Búsqueda": "Sales Ads / Buying Offers",
+	"Tag:": {
+		"one": "Tag:",
+		"other": "Tags:"
+	},
+	"This is the page for the services": "This is the page for the services",
+	"Welcome to {{title}}": "Welcome to {{title}}",
+	"Services": "Services",
+	"Login": "Login",
+	"Invalid credentials": "Invalid credentials",
+	"Privado": "Private",
+	"Logout": "Logout",
+	"Lista de Anuncios": "Adverts List",
+	"Resultados:": "Rows:",
+	"Documentation": "Documentation",
+	"Imagen": "Image",
+	"Nombre": "Name",
+	"Tipo de Anuncio": "Ad Type",
+	"Precio": "Price",
+	"Tags": "Tags"
+}

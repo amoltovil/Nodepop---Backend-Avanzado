@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('dotenv').config();
 
 /**
  * Module dependencies.
@@ -7,6 +8,18 @@
 var app = require('../app');
 var debug = require('debug')('nodepop:server');
 var http = require('http');
+
+/**
+ * Para probar cookie de session en modo seguro (HTTPS)
+const https = require('https');
+const fs = require('fs');
+// Options: Clave y certificados que tendriamos que generar
+const options = {
+  cert: fs.readFileSync('./certs/example.com+5.pem'),
+  key: fs.readFileSync('./certs/example.com+5-key.pem')
+};
+ */
+
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +33,12 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Create HTTPS server.
+var server = https.createServer(options, app);
+
+*/
 
 /**
  * Listen on provided port, on all network interfaces.

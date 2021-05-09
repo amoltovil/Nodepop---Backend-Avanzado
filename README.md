@@ -1,4 +1,46 @@
-# Documentación Práctica WEB-API/Node.js/MongoDB
+# Documentación Práctica Backend Avanzado
+## Deploy
+
+```sh
+npm install
+```
+
+Copy .env.example to .env and review the config.
+
+```sh
+cp .env.example .env
+```
+
+## Database initilization
+
+If you want to reset your DB, you can run:
+
+```sh
+npm run initDB
+```
+
+## Start Server
+
+```sh
+npm start
+```
+
+## Start Server and workers (cluster mode)
+
+```sh
+npm run cluster
+```
+
+## Start Thumbnail Service
+
+```sh
+npm run thumbnailService
+```
+
+## Comando para arrancar MongoDB (mac/linux)
+
+./bin/mongod --dbpath ./data/db
+
 
 ## Introducción 
 
@@ -823,11 +865,10 @@ Los resultados obtenidos se mostraran en una página HTML renderizada con los da
      La consulta a la colección anuncios obtiene (response) un documento anuncio que cumple todos los filtros que le hemos hecho en la petición http (request).
      En nuestro website solo muestra un documento que cumple todos los requisitos.
 
-     ![Imagen resultado ejemplo 8 en website](/nodepop/public/images/docum/resultado.png)
+     ![Imagen resultado ejemplo 8 en website](./pictures/docum/resultado.png)
 
 ##### Imágenes del proyecto
 
 Las imágenes utilizadas en el proyecto se han obtenido de las siguientes webs gratuitas:
 - [Pexels.com] (https://www.pexels.com) 
 - [istockphoto.com] (https://www.istockphoto.com) 
-

@@ -1,17 +1,33 @@
 var express = require('express');
 var router = express.Router();
-
+const path = require('path');
 const Anuncio = require('../../models/Anuncio');  // cargamos el modelo
+const jwtAuth = require('../../lib/jwtAuth');
+const multer = require('multer');
+const cote = require('cote');
 
-/* GET /api/anuncios */
-// listar anuncios
-router.get('/', async function(req, res, next) {
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+                 cb(null, path.join(__dirname, '../../public/images/anuncios/'));
+    },
+    filename: function(req, file, cb) {
+                 cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage });
+
+/**
+ * GET /api/anuncios (listar anuncios)
+ */
+router.get('/', jwtAuth, async function(req, res, next) {
 
     try {
 
+        console.log(`El usuario que está haciendo la petición es ${req.apiAuthUserId}`);
+
         var precios = [];
         var vtags=[];
-        var filterPrices;
     
         const nombre = req.query.nombre;
         const venta = req.query.venta;
@@ -25,7 +41,7 @@ router.get('/', async function(req, res, next) {
         const sort = req.query.sort;
         //http://localhost:3000/api/anuncios/?sort=precio%20-nombre
         // ordena por precio ascendente y nombre descendente
-    
+        
         const filtro = {}
         if (nombre) {
             filtro.nombre = new RegExp('^' + nombre, "i")
@@ -63,9 +79,7 @@ router.get('/', async function(req, res, next) {
             }            
         }
 
-        console.log(filtro)
-        //await Anuncio.find(); // funciona con una función async
-        const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort)//await Anuncio.lista({ name : name});
+        const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort)
         res.json(resultado);
 
     } catch (err){
@@ -74,9 +88,10 @@ router.get('/', async function(req, res, next) {
     
 });
 
-// GET /api/anuncios:id
-// Obtener un anuncio por id
-router.get('/:id', async (req, res, next)=>{
+/**
+ * GET /api/anuncios:id (Obtener un anuncio por id)
+ */
+router.get('/:id', jwtAuth, async (req, res, next)=>{
     try {
         const _id = req.params.id;
 
@@ -95,35 +110,74 @@ router.get('/:id', async (req, res, next)=>{
     }
 });
 
-//POST /api/anuncios (body) crear un anuncio
-router.post('/', async (req, res, next) => {
+/**
+ * POST /api/anuncios (body) crear un anuncio 
+ */
+router.post('/', jwtAuth, upload.single('foto'), async (req, res, next) => {
     try {
-        
-        const anuncioData = req.body;
+        var foto='';
+        const { nombre, venta, precio, tags, createdAt } = req.body;
+        if (req.file) {
+            foto = req.file.filename;
+        }
+        //console.log('req.file', req.file);
+        //console.log('req.file.filename', req.file.filename);
+        //const anuncioData = req.body;
 
-        const anuncio = new Anuncio(anuncioData);   // crea una instancia de objecto Agente 
+        const anuncio = new Anuncio({nombre, venta, precio, tags, createdAt, foto });   
         // este es un método de instancia
         const anuncioCreado = await anuncio.save (); // lo guarda en base de datos
 
         await anuncio.crear();
-        
-        res.status(201).json({result:anuncioCreado});
 
+        const requester = new cote.Requester({ name: 'client thumbnail image' });
+
+        if (req.file) {
+            const imagen = req.file.originalname;
+            const ruta_imagen = path.join(__dirname, '../../public/images/anuncios/')
+            const ruta_destino = path.join(__dirname, '../../public/images/anuncios/thumbnails');
+            
+            console.log('ruta imagen', ruta_imagen);
+            console.log('ruta destino', ruta_destino);
+
+            requester.send({
+                type: 'do thumbnail image',
+                imagen: imagen,
+                ruta_imagen: ruta_imagen,
+                ruta_destino: ruta_destino
+                
+            }, async resultado => {
+                try {
+                   console.log('realizado el thumbnail de la imagen')
+                }
+                catch (err) {
+                    next(err);
+                }
+           })
+    
+        }
+    
+        res.status(201).json({ result: anuncioCreado });
+       
     } catch (error) {
         next(error);
     }
 });
 
-// PUT /api/anuncios:id (body)  (actualizar un anuncio, en el body le pasamos lo que queremos actualizar)
-router.put('/:id', async (req, res, next) =>{
+/**
+ * PUT /api/anuncios:id (body)  
+ * Actualizar un anuncio, en el body le pasamos lo que queremos actualizar
+ */
+router.put('/:id',jwtAuth, async (req, res, next) =>{
     try {
         const _id = req.params.id;
         const anuncioData = req.body;
-
+        
         const anuncioActualizado = await Anuncio.findOneAndUpdate({_id:_id}, anuncioData, {
-            new: true, 
-            useFindAndModify: false
-        });
+             new: true, 
+             useFindAndModify: false
+         });
+
         // usamos {new:true} para que nos devuelva el anuncio actualizado, para evitar el error
         // de deprecated añade useFindAndModify:false
 
@@ -138,9 +192,10 @@ router.put('/:id', async (req, res, next) =>{
     }
 });
 
-// DELETE /api/anuncio: id
-// elimina un anuncio
-router.delete('/:id', async (req, res, next)=>{
+/**
+ * DELETE /api/anuncio: id (Elimina un anuncio dado su id)
+ */
+router.delete('/:id', jwtAuth, async (req, res, next)=>{
     try {
         const _id = req.params.id;
 
@@ -152,6 +207,5 @@ router.delete('/:id', async (req, res, next)=>{
         next(error);
     }
 })
-
 
 module.exports = router;

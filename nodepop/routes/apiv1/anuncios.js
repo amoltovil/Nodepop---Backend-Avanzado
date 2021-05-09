@@ -1,13 +1,27 @@
 var express = require('express');
 var router = express.Router();
+const jwtAuth = require('../../lib/jwtAuth');
+const multer = require('multer');
+const cote = require('cote');
 
-// cargamos el modelo
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+                 cb(null, path.join(__dirname, '../../public/images/anuncios/'));
+    },
+    filename: function(req, file, cb) {
+                 cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage });
+
 const Anuncio = require('../../models/Anuncio');  
 
-/* GET /apiv1/anuncios */
-// 1ª versión de listar anuncios
-//http://localhost:3000/apiv1/anuncios
-router.get('/', async function(req, res, next) {
+/**
+ * GET /apiv1/anuncios  (1ª versión de listar anuncios)
+ * desde el browser : http://localhost:3000/apiv1/anuncios
+ */
+router.get('/', jwtAuth, async function(req, res, next) {
     // CON ASYNC AWAIT
     // 1ª Versión sin filtros 
     // try {
@@ -18,8 +32,10 @@ router.get('/', async function(req, res, next) {
     // } catch (err){
     //     next(err);
     // }
-
+    // Con filtros
     try {
+        
+      //  console.log(`El usuario que está haciendo la petición es ${req.apiAuthUserId}`);
 
         var precios = [];
         var vtags= [];
@@ -67,14 +83,15 @@ router.get('/', async function(req, res, next) {
        // podremos buscar por varios tags separados por comas
         if (tags) {
             if (tags.includes(',')) {
-               vtags = tags.split(',');
-               filtro.tags = {$in: vtags};
+                vtags = tags.split(',');
+                filtro.tags = { $in: vtags };
             }
-            } else {
-               filtro.tags = {$in: tags};    
+            else {
+                filtro.tags = { $in: tags };
             }
-
-        console.log(filtro)        
+        }
+           
+        //console.log(filtro)        
         const resultado = await Anuncio.lista(filtro, limit, skip, fields, sort) 
         res.json(resultado);
 
@@ -82,6 +99,106 @@ router.get('/', async function(req, res, next) {
         next(err);
     }
     
+});
+
+/**
+ * POST /apiv1/anuncios (body) crear un anuncio
+*/
+router.post('/', jwtAuth, upload.single('foto'), async (req, res, next) => {
+    try {
+        
+        var foto='';
+        const { nombre, venta, precio, tags, createdAt } = req.body;
+        if (req.file) {
+            foto = req.file.filename;
+        }
+        //console.log('req.file', req.file);
+        //console.log('req.file.filename', req.file.filename);
+        //const anuncioData = req.body;
+
+        const anuncio = new Anuncio({nombre, venta, precio, tags, createdAt, foto });   
+        // este es un método de instancia
+        const anuncioCreado = await anuncio.save (); // lo guarda en base de datos
+
+        await anuncio.crear();
+
+        const requester = new cote.Requester({ name: 'client thumbnail image' });
+
+        if (req.file) {
+            const imagen = req.file.originalname;
+            const ruta_imagen = path.join(__dirname, '../../public/images/anuncios/')
+            const ruta_destino = path.join(__dirname, '../../public/images/anuncios/thumbnails');
+            
+            console.log('ruta imagen', ruta_imagen);
+            console.log('ruta destino', ruta_destino);
+
+            requester.send({
+                type: 'do thumbnail image',
+                imagen: imagen,
+                ruta_imagen: ruta_imagen,
+                ruta_destino: ruta_destino
+                
+            }, async resultado => {
+                try {
+                   console.log('realizado el thumbnail de la imagen')
+                }
+                catch (err) {
+                    next(err);
+                }
+           })
+    
+        }
+    
+        res.status(201).json({ result: anuncioCreado });
+       
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * PUT /apiv1/anuncios:id (body) 
+ * Actualizar un anuncio, en el body le pasamos lo que queremos actualizar
+ */
+
+router.put('/:id', jwtAuth, async (req, res, next) =>{
+    try {
+        const _id = req.params.id;
+        const anuncioData = req.body;
+
+        const anuncioActualizado = await Anuncio.findOneAndUpdate({_id:_id}, anuncioData, {
+            new: true, 
+            useFindAndModify: false
+        });
+        // usamos {new:true} para que nos devuelva el anuncio actualizado, para evitar el error
+        // de deprecated añade useFindAndModify:false
+
+        if (!anuncioActualizado){
+            res.status(404).json({error: 'not found'});
+            return;
+        }
+
+        res.json({result:anuncioActualizado});
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * DELETE /apiv1/anuncio: id
+ * elimina un anuncio dado su id
+ */
+router.delete('/:id', jwtAuth, async (req, res, next) => {
+    try {
+        const _id = req.params.id;
+
+        //await Anuncio.remove({_id:_id}); para evitar el error de la consola deprecated
+        await Anuncio.deleteOne({ _id: _id });
+        res.json();
+
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
